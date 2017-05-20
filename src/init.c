@@ -4,6 +4,7 @@
 #include <commands/extension.h>
 
 #include "executor.h"
+#include "guc.h"
 
 #define MIN_SUPPORTED_VERSION_STR "9.6"
 #define MIN_SUPPORTED_VERSION_NUM 90600
@@ -44,6 +45,7 @@ _PG_init(void)
 	_planner_init();
 	_executor_init();
 	_process_utility_init();
+	_guc_init();
 }
 
 void
@@ -53,6 +55,7 @@ _PG_fini(void)
 	 * Order of items should be strict reverse order of _PG_init. Please
 	 * document any exceptions.
 	 */
+	_guc_fini();
 	_process_utility_fini();
 	_executor_fini();
 	_planner_fini();
